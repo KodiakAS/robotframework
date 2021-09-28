@@ -7,6 +7,7 @@ from robot.parsing.model.statements import (
     LibraryImport,
     ResourceImport,
     VariablesImport,
+    OrthogonalFactor,
     Documentation,
     Metadata,
     Tags,
@@ -85,7 +86,8 @@ class TestCreateStatementsFromParams(unittest.TestCase):
             Token.VARIABLE_HEADER: 'Variables',
             Token.TESTCASE_HEADER: 'Test Cases',
             Token.KEYWORD_HEADER: 'Keywords',
-            Token.COMMENT_HEADER: 'Comments'
+            Token.COMMENT_HEADER: 'Comments',
+            Token.ORTHOGONAL_HEADER: 'Orthogonal Factors',
         }
         for token_type, name in headers.items():
             tokens = [

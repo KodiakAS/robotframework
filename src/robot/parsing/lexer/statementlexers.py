@@ -62,6 +62,10 @@ class SectionHeaderLexer(StatementLexer):
         return statement[0].value.startswith('*')
 
 
+class OrthogonalSectionHeaderLexer(SectionHeaderLexer):
+    token_type = Token.ORTHOGONAL_HEADER
+
+
 class SettingSectionHeaderLexer(SectionHeaderLexer):
     token_type = Token.SETTING_HEADER
 
@@ -90,6 +94,14 @@ class ErrorSectionHeaderLexer(SectionHeaderLexer):
 
 class CommentLexer(StatementLexer):
     token_type = Token.COMMENT
+
+
+class OrthogonalLexer(StatementLexer):
+
+    def lex(self):
+        self.statement[0].type = Token.ORTHOGONAL_FACTOR
+        for token in self.statement[1:]:
+            token.type = Token.ARGUMENT
 
 
 class SettingLexer(StatementLexer):

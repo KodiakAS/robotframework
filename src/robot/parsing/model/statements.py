@@ -34,7 +34,7 @@ class Statement(ast.AST):
     _attributes = ('lineno', 'col_offset', 'end_lineno', 'end_col_offset', 'errors')
     _statement_handlers = {}
 
-    def __init__(self, tokens, errors=()):
+    def __init__(self, tokens=[], errors=()):
         self.tokens = tuple(tokens)
         self.errors = errors
 
@@ -207,14 +207,14 @@ class Fixture(Statement):
 
 @Statement.register
 class SectionHeader(Statement):
-    handles_types = (Token.SETTING_HEADER, Token.VARIABLE_HEADER,
+    handles_types = (Token.ORTHOGONAL_HEADER,Token.SETTING_HEADER, Token.VARIABLE_HEADER,
                      Token.TESTCASE_HEADER, Token.KEYWORD_HEADER,
                      Token.COMMENT_HEADER)
 
     @classmethod
     def from_params(cls, type, name=None, eol=EOL):
         if not name:
-            names = ('Settings', 'Variables', 'Test Cases', 'Keywords', 'Comments')
+            names = ('Orthogonal Factors', 'Settings', 'Variables', 'Test Cases', 'Keywords', 'Comments')
             name = dict(zip(cls.handles_types, names))[type]
         if not name.startswith('*'):
             name = '*** %s ***' % name
@@ -557,6 +557,11 @@ class Variable(Statement):
     def _is_valid_dict_item(self, item):
         name, value = split_from_equals(item)
         return value is not None or is_dict_variable(item)
+
+
+@Statement.register
+class OrthogonalFactor(Statement):
+    type = Token.ORTHOGONAL_FACTOR
 
 
 @Statement.register

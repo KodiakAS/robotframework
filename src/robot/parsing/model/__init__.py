@@ -13,7 +13,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-from .blocks import (File, SettingSection, VariableSection, TestCaseSection,
+from .blocks import (File, OrthogonalSection, SettingSection, VariableSection, TestCaseSection,
                      KeywordSection, CommentSection, TestCase, Keyword, For, If)
 from .statements import Statement
 from .visitor import ModelTransformer, ModelVisitor

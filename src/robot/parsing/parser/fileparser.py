@@ -19,7 +19,7 @@ from robot.utils import is_pathlike, is_string
 
 from ..lexer import Token
 from ..model import (File, CommentSection, SettingSection, VariableSection,
-                     TestCaseSection, KeywordSection)
+                     TestCaseSection, KeywordSection, OrthogonalSection)
 
 from .blockparsers import Parser, TestCaseParser, KeywordParser
 
@@ -43,6 +43,7 @@ class FileParser(Parser):
 
     def parse(self, statement):
         parser_class = {
+            Token.ORTHOGONAL_HEADER: OrthogonalSectionParser,
             Token.SETTING_HEADER: SettingSectionParser,
             Token.VARIABLE_HEADER: VariableSectionParser,
             Token.TESTCASE_HEADER: TestCaseSectionParser,
@@ -69,6 +70,10 @@ class SectionParser(Parser):
     def parse(self, statement):
         self.model.body.append(statement)
         return None
+
+
+class OrthogonalSectionParser(SectionParser):
+    model_class = OrthogonalSection
 
 
 class SettingSectionParser(SectionParser):

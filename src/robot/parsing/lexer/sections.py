@@ -19,11 +19,15 @@ from .tokens import Token
 
 
 class Sections(object):
+    orthogonal_markers = ('Orthogonal Factors', 'Orthogonal Arrays')
     setting_markers = ('Settings', 'Setting')
     variable_markers = ('Variables', 'Variable')
     test_case_markers = ('Test Cases', 'Test Case', 'Tasks', 'Task')
     keyword_markers = ('Keywords', 'Keyword')
     comment_markers = ('Comments', 'Comment')
+
+    def orthogonal(self, statement):
+        return self._handles(statement, self.orthogonal_markers)
 
     def setting(self, statement):
         return self._handles(statement, self.setting_markers)

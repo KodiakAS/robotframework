@@ -40,6 +40,7 @@ class Token(object):
     If :attr:`type` is :attr:`EOL` in this case, the value is set to ``'\\n'``.
     """
 
+    ORTHOGONAL_HEADER = 'ORTHOGONAL HEADER'
     SETTING_HEADER = 'SETTING HEADER'
     VARIABLE_HEADER = 'VARIABLE HEADER'
     TESTCASE_HEADER = 'TESTCASE HEADER'
@@ -72,6 +73,7 @@ class Token(object):
 
     NAME = 'NAME'
     VARIABLE = 'VARIABLE'
+    ORTHOGONAL_FACTOR = 'ORTHOGONAL_FACTOR'
     ARGUMENT = 'ARGUMENT'
     ASSIGN = 'ASSIGN'
     KEYWORD = 'KEYWORD'

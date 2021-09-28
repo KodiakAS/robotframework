@@ -36,6 +36,9 @@ class FileContext(LexingContext):
         LexingContext.__init__(self, settings)
         self.sections = self.sections_class()
 
+    def orthogonal_section(self, statement):
+        return self.sections.orthogonal(statement)
+
     def setting_section(self, statement):
         return self.sections.setting(statement)
 

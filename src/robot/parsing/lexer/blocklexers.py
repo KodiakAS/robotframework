@@ -15,6 +15,7 @@
 
 from .tokens import Token
 from .statementlexers import (Lexer,
+                              OrthogonalSectionHeaderLexer, OrthogonalLexer,
                               SettingSectionHeaderLexer, SettingLexer,
                               VariableSectionHeaderLexer, VariableLexer,
                               TestCaseSectionHeaderLexer,
@@ -77,7 +78,7 @@ class FileLexer(BlockLexer):
         self._lex_with_priority(priority=SettingSectionLexer)
 
     def lexer_classes(self):
-        return (SettingSectionLexer, VariableSectionLexer,
+        return (SettingSectionLexer, OrthogonalSectionLexer, VariableSectionLexer,
                 TestCaseSectionLexer, KeywordSectionLexer,
                 CommentSectionLexer, ErrorSectionLexer,
                 ImplicitCommentSectionLexer)
@@ -87,6 +88,15 @@ class SectionLexer(BlockLexer):
 
     def accepts_more(self, statement):
         return not statement[0].value.startswith('*')
+
+
+class OrthogonalSectionLexer(SectionLexer):
+
+    def handles(self, statement):
+        return self.ctx.orthogonal_section(statement)
+
+    def lexer_classes(self):
+        return (OrthogonalSectionHeaderLexer, OrthogonalLexer)
 
 
 class SettingSectionLexer(SectionLexer):

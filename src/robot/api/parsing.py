@@ -480,6 +480,7 @@ from robot.parsing import (
 )
 from robot.parsing.model.blocks import (
     File,
+    OrthogonalSection,
     SettingSection,
     VariableSection,
     TestCaseSection,
@@ -505,6 +506,7 @@ from robot.parsing.model.statements import (
     TestTeardown,
     TestTemplate,
     TestTimeout,
+    OrthogonalFactor,
     Variable,
     TestCaseName,
     KeywordName,

@@ -23,6 +23,7 @@ from robot.utils import FileReader, read_rest_data
 
 from .testsettings import TestDefaults
 from .transformers import SuiteBuilder, SettingsBuilder, ResourceBuilder
+from .orthogonalizers import OrthogonalTestGenerator
 from ..model import TestSuite, ResourceFile
 
 
@@ -63,6 +64,8 @@ class RobotParser(BaseParser):
         if model is None:
             model = get_model(self._get_source(source), data_only=True,
                               curdir=self._get_curdir(source))
+
+        OrthogonalTestGenerator().visit(model)
         ErrorReporter(source).visit(model)
         SettingsBuilder(suite, defaults).visit(model)
         SuiteBuilder(suite, defaults).visit(model)

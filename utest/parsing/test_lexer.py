@@ -890,7 +890,7 @@ class TestForLoop(unittest.TestCase):
         ]
         self._verify(header, expected)
 
-    def _verify(self, header, expected_header):
+    def _verify(self, header=[], expected_header=[]):
         data = '''\
 *** %s ***
 Name

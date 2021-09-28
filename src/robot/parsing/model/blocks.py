@@ -91,6 +91,10 @@ class VariableSection(Section):
     pass
 
 
+class OrthogonalSection(Section):
+    pass
+
+
 class TestCaseSection(Section):
 
     @property
@@ -109,7 +113,7 @@ class CommentSection(Section):
 class TestCase(Block):
     _fields = ('header', 'body')
 
-    def __init__(self, header, body=None):
+    def __init__(self, header=[], body=None):
         self.header = header
         self.body = body or []
 
@@ -121,7 +125,7 @@ class TestCase(Block):
 class Keyword(Block):
     _fields = ('header', 'body')
 
-    def __init__(self, header, body=None):
+    def __init__(self, header=[], body=None):
         self.header = header
         self.body = body or []
 
@@ -137,7 +141,7 @@ class If(Block):
     """
     _fields = ('header', 'body', 'orelse', 'end')
 
-    def __init__(self, header, body=None, orelse=None, end=None, errors=()):
+    def __init__(self, header=[], body=None, orelse=None, end=None, errors=()):
         self.header = header
         self.body = body or []
         self.orelse = orelse
@@ -182,7 +186,7 @@ class If(Block):
 class For(Block):
     _fields = ('header', 'body', 'end')
 
-    def __init__(self, header, body=None, end=None, errors=()):
+    def __init__(self, header=[], body=None, end=None, errors=()):
         self.header = header
         self.body = body or []
         self.end = end
